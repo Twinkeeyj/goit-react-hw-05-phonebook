@@ -12,33 +12,68 @@ code {
     monospace;
 }
 
-
-.logo-appear{
-  transform:  translateX(-10%);
+.logo-appear {
+  transform: translateX(-10%);
   opacity: 0;
 }
-.logo-appear-active{
+.logo-appear-active {
   opacity: 1;
-  transform:  translateX(0);
+  transform: translateX(0);
   transition: all 1000ms linear;
-
 }
 
 .showbutton-enter {
   opacity: 0;
-  transform:  translateX(0);
+  transform: translateX(-100%);
 }
-.showbutton-enter-active{
-  transform:  translateX(-50%);
+.showbutton-enter-active {
+  transform: translateX(0);
   opacity: 1;
-  transition:  all 1250ms linear;
+  transition: all 250ms linear;
 }
-.showbutton-exit{
-  transform:  translateX(0);
+
+.showbutton-exit {
+  transform: translateX(0);
   opacity: 1;
 }
-.showbutton-exit-active{
-  transform:  translateX(-50%);
+.showbutton-exit-active {
+  transform: translateX(-50%);
   opacity: 0;
-  transition: all 1250ms linear;
+  transition: all 250ms linear;
+}
+
+.answerContainer {
+  width: 260px;
+  height: 40px;
+  color: rgb(62, 5, 5);
+  background-color: rgb(228, 173, 173);
+  border: 2px solid rgb(15, 15, 15);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+.answer-enter {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.answer-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 250ms ease-in-out, transform 250ms ease-in-out;
+}
+
+.answer-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.answer-exit-active {
+  opacity: 0;
+  transform: translateX(100%);
+  transition: opacity 250ms ease-in-out, transform 250ms ease-in-out;
 }

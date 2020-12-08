@@ -5,12 +5,19 @@ import ContactList from './components/ContactList/ContactList';
 import Filter from './components/Filter/Filter';
 import classes from "./App.module.css"
 import { CSSTransition } from "react-transition-group";
+import AnswerError from "./components/AnswerError/AnswerError"
 
 const contactList = [];
+const ERROR = {
+  isVisible: false,
+  answer: "Such a contact is already in the list!",
+};
+
 export default class App extends Component {
   state = {
     contacts: [...contactList],
     filter: '',
+    ...ERROR
   };
   componentDidMount() {
     const persistedTask = localStorage.getItem("contacts");
@@ -28,7 +35,14 @@ export default class App extends Component {
   toAddContact = el => {
     const truly = this.state.contacts.find(contact => contact.name === el.name);
     if (truly) {
-      alert(`Імя ${el.name} вже є в списку`, null, 2);
+      this.setState({
+        isVisible: true,
+       });
+      setTimeout(() => {
+        this.setState({
+          ...ERROR,
+        });
+      }, 1500);
     } else if(el.name.length>=1){
       this.setState(prev => {
         const updateState = [...prev.contacts, el];
@@ -58,12 +72,12 @@ export default class App extends Component {
 
   };
   render() {
-    const { contacts, filter } = this.state;
+    const { contacts, filter,isVisible,answer } = this.state;
     const filterText = this.filtresTask();
 
     return (
       <div className={classes.container}>
-         <CSSTransition in={true} classNames="logo"timeout={1000} appear={true} unmountOnExit>
+         <CSSTransition in={true} classNames="logo"timeout={250} appear={true} unmountOnExit>
           <h1 >Phonebook</h1>
         </CSSTransition>
         <ContactForm addContact={this.toAddContact} />
@@ -72,6 +86,9 @@ export default class App extends Component {
           <Filter value={filter} filterRender={this.filterRender} />
         )}
         <ContactList list={filterText} Delete={this.toDeleteContact} />
+        <CSSTransition in={isVisible} timeout={250} unmountOnExit classNames="answer">
+          <AnswerError answer={answer} />
+        </CSSTransition>
       </div>
     );
   }
