@@ -7,7 +7,7 @@ import classes from "./App.module.css"
 import { CSSTransition } from "react-transition-group";
 import AnswerError from "./components/AnswerError/AnswerError"
 
-const contactList = [];
+
 const ERROR = {
   isVisible: false,
   answer: "Such a contact is already in the list!",
@@ -15,7 +15,7 @@ const ERROR = {
 
 export default class App extends Component {
   state = {
-    contacts: [...contactList],
+    contacts: [],
     filter: '',
     ...ERROR
   };
@@ -76,6 +76,7 @@ export default class App extends Component {
     const filterText = this.filtresTask();
 
     return (
+      <>
       <div className={classes.container}>
          <CSSTransition in={true} classNames="logo"timeout={250} appear={true} unmountOnExit>
           <h1 >Phonebook</h1>
@@ -90,6 +91,7 @@ export default class App extends Component {
           <AnswerError answer={answer} />
         </CSSTransition>
       </div>
+      </>
     );
   }
 }
