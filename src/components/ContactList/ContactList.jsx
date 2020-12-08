@@ -9,7 +9,7 @@ const ContactList = function ({ list, Delete }) {
 
   return (
     <>
-       <TransitionGroup component="ul" className={classes.container}>
+       <TransitionGroup component="ul" className={classes.container} >
         {list.map((el) => {
           return (
               <CSSTransition key={el.id} classNames="showbutton" timeout={250}  >
